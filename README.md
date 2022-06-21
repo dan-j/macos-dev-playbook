@@ -31,13 +31,9 @@ pip install ansible
 
 ### Playbook customisation
 
-Create a `config.yml` file to override the defaults specified in `default.config.yml`. 
+Create a `config.yml` file to override the defaults specified in `default.config.yml`.
 
-The only required aspect which required 
-
-### Execute the playbook
-
-
+### Playbook execution
 
 This playbook can be customised by creating a new `config.yml` file (`.yml` extension is mandatory, `.yaml` will not 
 work). This  user-specified configuration which should not be committed 
