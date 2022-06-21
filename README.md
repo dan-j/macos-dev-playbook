@@ -1,23 +1,59 @@
-<img src="https://raw.githubusercontent.com/geerlingguy/mac-dev-playbook/master/files/Mac-Dev-Playbook-Logo.png" width="250" height="156" alt="Mac Dev Playbook Logo" />
-
-# Mac Development Ansible Playbook
+# MacOS Development Playbook
 
 [![CI][badge-gh-actions]][link-gh-actions]
 
-This playbook installs and configures most of the software I use on my Mac for web and software development. Some things in macOS are slightly difficult to automate, so I still have a few manual installation steps, but at least it's all documented here.
+> Thanks to [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook), for which this 
+> repository is heavily inspired from. The configuration has been modified to run without root (where possible), 
+> only install components which I personally prefer, and update the installation instructions. 
 
-## Installation
+This playbook configures a MacOS system for development purposes.
 
-  1. Ensure Apple's command line tools are installed (`xcode-select --install` to launch the installer).
-  2. [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/index.html):
+## Getting started
 
-     1. Run the following command to add Python 3 to your $PATH: `export PATH="$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:$PATH"`
-     2. Upgrade Pip: `sudo pip3 install --upgrade pip`
-     3. Install Ansible: `pip3 install ansible`
+### Install Ansible
 
-  3. Clone or download this repository to your local drive.
-  4. Run `ansible-galaxy install -r requirements.yml` inside this directory to install required Ansible roles.
-  5. Run `ansible-playbook main.yml --ask-become-pass` inside this directory. Enter your macOS account password when prompted for the 'BECOME' password.
+Before applying this playbook, you must manually install Ansible to your system. To verify if Ansible is installed 
+you can run `ansible --version` and if so, this section can be skipped.
+
+```
+# install the Apple command line tools
+xcode-select --install
+
+# add python `bin` directory to your `PATH`
+export PATH=$HOME/Library/Python/3.8/bin:$PATH
+
+# upgrade pip
+pip install --upgrade pip
+
+# install ansible
+pip install ansible
+```
+
+### Playbook customisation
+
+Create a `config.yml` file to override the defaults specified in `default.config.yml`. 
+
+The only required aspect which required 
+
+### Execute the playbook
+
+
+
+This playbook can be customised by creating a new `config.yml` file (`.yml` extension is mandatory, `.yaml` will not 
+work). This  user-specified configuration which should not be committed 
+
+1. Clone this repository and `cd` into it (MacOS ships with `git` by default so you shouldn't need to install it)
+2. Install the required ansible roles/collections:
+
+   ```
+   ansible-galaxy install -r requirements.yml
+   ```
+4. Execute the playbook:
+   
+   ```
+   ansible-playbook main.yml --ask-become-pass
+   ```
+
 
 > Note: If some Homebrew commands fail, you might need to agree to Xcode's license or fix some other Brew issue. Run `brew doctor` to see if this is the case.
 

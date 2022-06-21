@@ -1,0 +1,7 @@
+---
+- name: Configure custom iTerm2 preferences
+  command: "{{ item }}"
+  with_items:
+    - defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "{{ iterm2_preferences_dir }}"
+    - defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+  when: iterm2_preferences_dir

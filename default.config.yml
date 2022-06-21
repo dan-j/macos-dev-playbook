@@ -1,12 +1,17 @@
 ---
-downloads: ~/.ansible-downloads/
-
-configure_dotfiles: true
-configure_terminal: true
-configure_osx: true
-
-# Set to 'true' to configure the Dock via dockutil.
 configure_dock: false
+configure_dotfiles: true
+configure_iterm2: true
+configure_krew: true
+configure_macos: true
+configure_nvm: true
+configure_oh_my_zsh: true
+configure_tmux: true
+
+################################################################################
+# Dock                                                                         #
+################################################################################
+
 dockitems_remove: []
 # - Launchpad
 # - TV
@@ -17,77 +22,215 @@ dockitems_persist: []
 #   path: "/Applications/Sublime Text.app/"
 #   pos: 5
 
-configure_sudoers: false
-sudoers_custom_config: ''
-# Example:
-# sudoers_custom_config: |
-#   # Allow users in admin group to use sudo with no password.
-#   %admin ALL=(ALL) NOPASSWD: ALL
+################################################################################
+# Dotfiles                                                                     #
+################################################################################
 
-dotfiles_repo: https://github.com/geerlingguy/dotfiles.git
+dotfiles_repo: https://github.com/dan-j/.dotfiles.git
 dotfiles_repo_accept_hostkey: true
-dotfiles_repo_local_destination: ~/Development/GitHub/dotfiles
+dotfiles_repo_local_destination: ~/.dotfiles
 dotfiles_files:
-  - .zshrc
+  - .zshrc.extras
   - .gitignore
-  - .inputrc
   - .osx
   - .vimrc
+  - .tmux.conf.local
 
+################################################################################
+# Homebrew                                                                     #
+################################################################################
+
+homebrew_cask_appdir: /Applications
 homebrew_installed_packages:
-  # - ansible # Installed via Pip.
-  - autoconf
-  - bash-completion
-  - doxygen
-  - gettext
-  - gifsicle
+  - act
+  - argocd
+  - autojump
+  - awscli
+  - bash
+  - bfg
+  - bufbuild/buf/buf
+  - cloc
+  - cockroachdb/tap/cockroach
+  - coreutils
+  - derailed/k9s/k9s
+  - dnsmasq
+  - dnstracer
+  - doctl
+  - fblog
+  - ffmpeg
+  - fluxcd/tap/flux
+  - fpp
+  - fzf
+  - gh
   - git
-  - github/gh/gh
-  - go
-  - gpg
+  - git-crypt
+  - gitlab-runner
+  - gnu-tar
+  - gnupg
+  - go-swagger/go-swagger/go-swagger
+  - go-task/tap/go-task
+  - golangci-lint
+  - googlecontainertools/kpt/kpt
+  - graphviz
+  - helm
+  - htop
   - httpie
-  - iperf
-  - libevent
-  - sqlite
-  - mcrypt
-  - nmap
-  - node
+  - httrack
+  - hugo
+  - hydra
+  - istioctl
+  - jq
+  - k3d
+  - knative/client/kn
+  - ko
+  - krew
+  - kube-ps1
+  - kubebuilder
+  - kubeseal
+  - kubeval
+  - kustomize
+  - lima
+  - make
+  - mongodb/brew/mongodb-community
+  - mysql
+  - nats-io/nats-tools/nats
+  - nats-io/nats-tools/nsc
   - nvm
-  - php
-  - ssh-copy-id
-  - cowsay
-  - readline
-  - openssl
-  - pv
+  - openapi-generator
+  - operator-sdk
+  - pyenv
+  - python-yq
+  - python@2
+  - reattach-to-user-namespace
+  - rename
+  - skaffold
+  - sloc
+  - solidity
+  - sstp-client
+  - stern
+  - telnet
+  - terraform
+  - tinygo-org/tools/tinygo
+  - tldr
+  - tmux
+  - tree
+  - vim
+  - watch
+  - websocat
   - wget
   - wrk
-  - zsh-history-substring-search
+  - yarn
+  - yq
+  - zsh
 
 homebrew_taps:
   - homebrew/core
   - homebrew/cask
+  - bufbuild/buf
+  - cockroachdb/tap
+  - derailed/k9s
+  - fluxcd/tap
+  - go-swagger/go-swagger
+  - go-task/tap
+  - googlecontainertools/kpt
+  - knative/client
+  - mongodb/brew
+  - nats-io/nats-tools
+  - tinygo-org/tools
 
-homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
+  - 1password
+  - 1passwork-cli
+  - alfred
+  - bloomrpc
   - chromedriver
   - docker
-  - dropbox
   - firefox
+  - font-hack
   - google-chrome
+  - google-cloud-sdk
   - handbrake
+  - insomnia
+  - iterm2
+  - jetbrains-toolbox
   - licecap
+  - ngrok
   - sequel-ace
   - slack
-  - sublime-text
-  - transmit
+  - spotify
   - vagrant
+  - virtualbox
+  - visual-studio-code
+  - vlc
+  - whatsapp
+
+################################################################################
+# Mac App Store                                                                #
+################################################################################
 
 # See `geerlingguy.mas` role documentation for usage instructions.
-mas_installed_apps: []
-mas_email: ""
-mas_password: ""
+mas_installed_apps:
+  - id: 905953485
+    name: "NordVPN: VPN Fast & Secure"
+  - id: 419330170
+    name: Moom
+  - id: 937984704
+    name: Amphetamine
+  - id: 1475897096
+    name: Jira Cloud by Atlassian
+# these should be prompted on execution but can be overridden here
+#mas_email: ""
+#mas_password: ""
 
 osx_script: "~/.osx --no-restart"
+
+################################################################################
+# oh-my-zsh                                                                    #
+################################################################################
+
+oh_my_zsh_theme: hyperzsh
+oh_my_zsh_install: yes
+oh_my_zsh_plugins:
+  - completion
+  - dotenv
+  - gcloud
+  - git
+  - golang
+  - isodate
+  - jsontools
+  - kubectl
+  - macos
+  - nvm
+  - zsh
+  - wd
+
+oh_my_zsh_users: []
+#  - username: "{{ ansible_user_id }}"
+
+################################################################################
+# Krew                                                                         #
+################################################################################
+
+krew_plugins:
+  - ctx
+  - df-pv
+  - graph
+  - neat
+  - ns
+
+################################################################################
+# NVM                                                                          #
+################################################################################
+nvm_node_default: lts/gallium
+nvm_node_versions:
+  - lts/dubnium
+  - lts/erbium
+  - lts/fermium
+  - lts/gallium
+
+################################################################################
+# extra-packages                                                               #
+################################################################################
 
 # Install packages from other package managers.
 # Note: You are responsible for making sure the required package managers are
@@ -108,24 +251,6 @@ pip_packages: []
 # - name: mkdocs
 #   state: present # present/absent/latest, default: present
 #   version: "0.16.3" # default: N/A
-
-# Set to 'true' to configure Sublime Text.
-configure_sublime: false
-sublime_base_path: '~/Library/Application Support/Sublime Text'
-sublime_config_path: "Packages/User"
-sublime_package_control:
-  - "DocBlockr"
-  - "Dockerfile Syntax Highlighting"
-  - "FileDiffs"
-  - "GitHub Flavored Markdown Preview"
-  - "Jinja2"
-  - "Package Control"
-  - "PHP-Twig"
-  - "Pretty JSON"
-  - "SublimeLinter"
-  - "SublimeLinter-contrib-yamllint"
-  - "TrailingSpaces"
-  - "WordCount"
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []

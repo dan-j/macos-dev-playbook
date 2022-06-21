@@ -1,0 +1,7 @@
+---
+- name: Install Krew plugins
+  shell:
+    cmd: kubectl krew install {{ item }}
+    creates: "{{ ansible_env.HOME }}/.krew/bin/kubectl-{{ item }}"
+  loop: "{{ krew_plugins }}"
+  when: krew_plugins

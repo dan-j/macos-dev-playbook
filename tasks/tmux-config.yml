@@ -1,0 +1,11 @@
+---
+- name: Install gpakosz/.tmux configuration
+  git:
+    repo: https://github.com/gpakosz/.tmux
+    dest: ~/.tmux
+    accept_hostkey: true
+- name: Link .tmux configuration
+  file:
+    src: ~/.tmux/.tmux.conf
+    path: ~/.tmux.conf
+    state: link

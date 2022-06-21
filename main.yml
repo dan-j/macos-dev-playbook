@@ -4,6 +4,13 @@
   vars_files:
     - default.config.yml
 
+  vars_prompt:
+    - name: mas_email
+      prompt: Enter Mac App Store email address
+      private: no
+    - name: mas_password
+      prompt: Enter Mac App Store password
+
   pre_tasks:
     - name: Include playbook configuration.
       include_vars: "{{ item }}"
@@ -24,26 +31,29 @@
     - role: geerlingguy.mac.dock
       when: configure_dock
       tags: ['dock']
+    - role: gantsign.oh-my-zsh
+      when: configure_oh_my_zsh
+      users: "{{ oh_my_zsh_users }}"
 
   tasks:
-    - import_tasks: tasks/sudoers.yml
-      when: configure_sudoers
-      tags: ['sudoers']
-
-    - import_tasks: tasks/terminal.yml
-      when: configure_terminal
-      tags: ['terminal']
-
-    - import_tasks: tasks/osx.yml
-      when: configure_osx
-      tags: ['osx']
-
+    - import_tasks: tasks/macos.yml
+      when: configure_macos
+      tags: ['macos']
+    - import_tasks: tasks/krew.yml
+      when: configure_krew
+      tags: ['krew']
     - import_tasks: tasks/extra-packages.yml
-      tags: ['extra-packages']
-
-    - import_tasks: tasks/sublime-text.yml
-      when: configure_sublime
-      tags: ['sublime-text']
+      tags: [ 'extra-packages' ]
+    - import_tasks: tasks/iterm2.yml
+      tags: ['iterm2']
+      when: configure_iterm2
+    - import_tasks: tasks/nvm.yml
+      tags: ['nvm']
+      when: configure_nvm
+    - import_tasks: tasks/tmux-config.yml
+      tags: ['tmux-config']
+      when: configure_tmux
+    - import_tasks: tasks/debug.yml
 
     - block:
         - name: Run configured post-provision ansible task files.

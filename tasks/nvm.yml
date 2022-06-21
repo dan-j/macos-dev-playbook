@@ -1,0 +1,19 @@
+---
+- name: Install NVM
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  environment:
+    PROFILE: "{{ ansible_env.HOME }}/.zshrc.extras"
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+- name: Install Node.JS versions
+  shell:
+    cmd: nvm install {{ item }}
+    creates: "{{ ansible_env.HOME }}/.nvm/versions/node/{{ item }}"
+  loop: "{{ nvm_node_versions }}"
+  when: nvm_node_versions is defined
+
+- name: Configure default Node.JS version
+  shell:
+    cmd: nvm alias default {{ nvm_node_default | default(node) }}
