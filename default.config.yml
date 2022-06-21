@@ -126,6 +126,7 @@ homebrew_installed_packages:
 homebrew_taps:
   - homebrew/core
   - homebrew/cask
+  - homebrew/cask-fonts
   - bufbuild/buf
   - cockroachdb/tap
   - derailed/k9s
