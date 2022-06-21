@@ -140,7 +140,7 @@ homebrew_taps:
 
 homebrew_cask_apps:
   - 1password
-  - 1passwork-cli
+  - 1password-cli
   - alfred
   - bloomrpc
   - chromedriver
