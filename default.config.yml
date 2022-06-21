@@ -133,7 +133,7 @@ homebrew_taps:
   - fluxcd/tap
   - go-swagger/go-swagger
   - go-task/tap
-  - googlecontainertools/kpt
+  - GoogleContainerTools/kpt
   - knative/client
   - mongodb/brew
   - nats-io/nats-tools
