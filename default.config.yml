@@ -7,6 +7,7 @@ configure_macos: true
 configure_nvm: true
 configure_oh_my_zsh: true
 configure_tmux: true
+configure_vim: true
 
 ################################################################################
 # Dock                                                                         #
@@ -76,10 +77,16 @@ dotfiles_repo_accept_hostkey: true
 dotfiles_repo_local_destination: ~/.dotfiles
 dotfiles_files:
   - .zshrc.extras
-  - .gitignore
+  - .gitconfig
   - .osx
   - .vimrc
   - .tmux.conf.local
+
+################################################################################
+# iterm2                                                                     #
+################################################################################
+
+iterm2_preferences_dir: ~/.dotfiles/iterm2
 
 ################################################################################
 # Homebrew                                                                     #
@@ -145,8 +152,6 @@ homebrew_installed_packages:
   - openapi-generator
   - operator-sdk
   - pyenv
-  - python-yq
-  - python@2
   - reattach-to-user-namespace
   - rename
   - skaffold
@@ -166,7 +171,6 @@ homebrew_installed_packages:
   - wget
   - wrk
   - yarn
-  - yq
   - zsh
 
 homebrew_taps:
@@ -231,7 +235,7 @@ mas_installed_apps:
 #mas_email: ""
 #mas_password: ""
 
-osx_script: "~/.osx --no-restart"
+osx_script: "{{ ansible_env.HOME }}/.osx --no-restart"
 
 ################################################################################
 # oh-my-zsh                                                                    #
@@ -240,7 +244,6 @@ osx_script: "~/.osx --no-restart"
 oh_my_zsh_theme: hyperzsh
 oh_my_zsh_install: yes
 oh_my_zsh_plugins:
-  - completion
   - dotenv
   - gcloud
   - git
@@ -250,11 +253,10 @@ oh_my_zsh_plugins:
   - kubectl
   - macos
   - nvm
-  - zsh
   - wd
 
-oh_my_zsh_users: []
-#  - username: "{{ ansible_user_id }}"
+oh_my_zsh_users:
+ - username: "{{ ansible_user_id }}"
 
 ################################################################################
 # Krew                                                                         #

@@ -1,0 +1,7 @@
+---
+- name: Install Vim Plug
+  shell: >
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/{{ vim_plug_version | default("master") }}/plug.vim
+  args:
+    creates: "{{ ansible_env.HOME }}/.vim/autoload/plug.vim"
